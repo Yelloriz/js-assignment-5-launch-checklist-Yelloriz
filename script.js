@@ -2,6 +2,8 @@
 
 window.addEventListener("load", ()=> {
     const form = document.querySelector("form");
+    let list = document.getElementById('faultyItems');
+    list.style.visibility = 'hidden';
     form.addEventListener("submit", (event)=>{
         event.preventDefault();
         //List DOM
@@ -9,7 +11,6 @@ window.addEventListener("load", ()=> {
         let copilot = document.querySelector("input[name=copilotName]").value;
         let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
         let cargoLevel = document.querySelector("input[name=cargoMass]").value;
-        let list = document.getElementById('faultyItems');
 
         //use formsubmission to validate and update list
         formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
@@ -39,16 +40,16 @@ window.addEventListener("load", ()=> {
 fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
     response.json().then(function(json){
         const missionTarget = document.getElementById('missionTarget');
-        const index = Math.floor(Math.random() * json.length - 1);
+        const randomNumber = Math.floor(Math.random() * json.length - 1);
         missionTarget.innerHTML = `
         <ol>
-        <li>Name: ${json[index].name}</li>
-        <li>Diameter: ${json[index].diameter}</li>
-        <li>Star: ${json[index].star}</li>
-        <li>Distance from Earth: ${json[index].distance}</li>
-        <li>Number of Moons: ${json[index].moons}</li>
+        <li>Name: ${json[randomNumber].name}</li>
+        <li>Diameter: ${json[randomNumber].diameter}</li>
+        <li>Star: ${json[randomNumber].star}</li>
+        <li>Distance from Earth: ${json[randomNumber].distance}</li>
+        <li>Number of Moons: ${json[randomNumber].moons}</li>
         </ol>
-        <img src="${json[index].image}">
+        <img src="${json[randomNumber].image}">
         `;
     });
 });
